@@ -31,7 +31,10 @@ def create_app(test_config=None):
         app.config['SQLALCHEMY_ENGINE_OPTIONS'] = engine_options
 
     # Create instance folder for SQLite database
+    try:
     os.makedirs(app.instance_path, exist_ok=True)
+except OSError:
+    pass
 
     # Initialize extensions
     db.init_app(app)
